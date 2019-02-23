@@ -2,7 +2,7 @@
 
 This is the demo app I used for my talk at the [ReactJS Brisbane meetup](https://www.meetup.com/en-AU/reactbris/) about React Suspense. It's also complimentary to the [medium article](https://medium.com/react-in-depth/why-react-suspense-will-be-a-game-changer-37b40fea71ec) I wrote a while back.
 
-I used [Created React App] for this demo as well as the latest canary version of React. Please note that Suspense for data loading is still highly experimental and APIs will change!
+I used [Created React App](https://github.com/facebook/create-react-app) for this demo as well as the latest canary version of React. Please note that Suspense for data loading is still highly experimental and APIs will change!
 
 ## How to use this repo
 
@@ -109,7 +109,7 @@ function Example ({ id }) {
 
   useEffect(() => {
     setLoading(true);
-    getData(this.props.id)
+    getData(id)
       .then(data => {
         setLoading(false);
         setError(null);
@@ -122,15 +122,15 @@ function Example ({ id }) {
       })
   }, [ id ]);
 
-  if (this.state.loading) {
+  if (loading) {
     return <p>Loading...</p>;
   }
 
-  if (this.state.error) {
-    return <p>Error: {this.state.error}</p>;
+  if (error) {
+    return <p>Error: {error}</p>;
   }
 
-  return <p>Loaded! {this.state.data}</p>;
+  return <p>Loaded! {data}</p>;
 }
 ```
 
