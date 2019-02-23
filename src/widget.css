@@ -1,0 +1,42 @@
+.widget {
+  width: 50%;
+  padding: 1rem;
+}
+
+.widget--inner {
+  background: white;
+  box-shadow: 0 .4rem 5rem -1rem rgba(0, 0, 0, .2);
+  width: 100%;
+  padding: 3rem;
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.widget--inner h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0;
+  padding: .3rem 0 1rem;
+}
+
+.widget-summary .widget--inner {
+  font-size: 2rem;
+}
+
+.color {
+  position: relative;
+  z-index: 2;
+}
+
+.color::before {
+  content: ' ';
+  z-index: -1;
+  position: absolute;
+  right: -1.5rem;
+  height: 2rem;
+  width: 2rem;
+  top: 20%;
+  background: var(--color, grey);
+  border-radius: 1rem;
+}

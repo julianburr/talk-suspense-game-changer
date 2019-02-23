@@ -1,0 +1,47 @@
+.speed-switch {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.speed-switch--switch {
+  width: 5rem;
+  height: 2rem;
+  border-radius: 1rem;
+  background: burlywood;
+  position: relative;
+}
+
+.speed-switch label {
+  position: absolute;
+  width: 2.4rem;
+  height: 2.4rem;
+  top: -.2rem;
+  left: -.2rem;
+  background: white;
+  border-radius: 1.2rem;
+  transition: left .2s, transform .2s;
+  cursor: pointer;
+  box-shadow: 0 .2rem 2rem rgba(0, 0, 0, .2);
+}
+
+.speed-switch label:active {
+  transform: scale(.9);
+}
+
+.speed-switch input:checked + label {
+  left: 3.2rem;
+}
+
+.speed-switch input {
+  opacity: 0;
+}
+
+.speed-switch--icon {
+  font-size: 3rem;
+  width: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity .2s;
+}

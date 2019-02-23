@@ -1,0 +1,42 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.4rem;
+  font-family: Futura;
+  background: floralwhite;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.app {
+  width: 100%;
+  max-width: 80rem;
+  margin: 5rem auto;
+  padding: 2rem;
+}
+
+.widgets {
+  margin: 0 -1rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.app header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+}
+
+.app header h1 {
+  display: inline-flex;
+  width: auto;
+}
