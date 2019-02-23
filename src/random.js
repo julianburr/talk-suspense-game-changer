@@ -1,69 +1,37 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import Spinner from './spinner';
 import api from './utils/api';
 
-export default class Random extends Component {
-  state = {
-    loading: true,
-    data: null,
-    error: null
-  };
+export default function Random ({ type, args }) {
+  const [ loading, setLoading ] = useState(true);
+  const [ error, setError ] = useState(null);
+  const [ data, setData ] = useState(null);
 
-  componentDidMount () {
-    const { type, args } = this.props;
-    api(type, args)
-      .then((data) =>
-        this.setState({
-          data,
-          loading: false,
-          error: null
+  const key = `${type}--${JSON.stringify(args)}`;
+
+  useEffect(
+    () => {
+      api(type, args)
+        .then((data) => {
+          setLoading(false);
+          setError(null);
+          setData(data);
         })
-      )
-      .catch(
-        (e) =>
-          console.error(e) ||
-          this.setState({
-            loading: false,
-            data: null,
-            error: e.message
-          })
-      );
-  }
+        .catch((e) => {
+          console.error(e);
+          setLoading(false);
+          setError(e.message);
+          setData(null);
+        });
+    },
+    [ key ]
+  );
 
-  componentDidUpdate (prevProps) {
-    const { type, args } = this.props;
-    if (prevProps.type !== type || prevProps.args !== args) {
-      this.setState({ loading: true }, () =>
-        api(type, args)
-          .then((data) =>
-            this.setState({
-              data,
-              loading: false,
-              error: null
-            })
-          )
-          .catch(
-            (e) =>
-              console.error(e) ||
-              this.setState({
-                loading: false,
-                data: null,
-                error: e.message
-              })
-          )
-      );
-    }
+  if (loading) {
+    return <Spinner />;
   }
-
-  render () {
-    const { loading, error, data } = this.state;
-    if (loading) {
-      return <Spinner />;
-    }
-    if (error) {
-      return <p>Something went wrong! {error}</p>;
-    }
-    return <p>{data}</p>;
+  if (error) {
+    return <p>Something went wrong! {error}</p>;
   }
+  return <p>{data}</p>;
 }
-
