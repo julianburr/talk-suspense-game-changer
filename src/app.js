@@ -16,7 +16,7 @@ export default function App () {
         <h1>Dashboard</h1>
         <SpeedSwitch />
       </header>
-      <Suspense fallback={<Spinner />}>
+      <Suspense fallback={<Spinner />} maxDuration={500}>
         <div className="widgets">
           <Widget title="Random Number">
             <Random type="number" />
