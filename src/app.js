@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import Widget from './widget';
 import Random from './random';
 import SpeedSwitch from './speed-switch';
 import GoodSwitch from './good-switch';
-import { DataProvider } from './utils/data-context';
+import Spinner from './spinner';
 
 import './app.css';
 
@@ -11,12 +11,12 @@ export default function App () {
   const [ onlyGood, setOnlyGood ] = useState(false);
 
   return (
-    <DataProvider>
-      <div className="app">
-        <header>
-          <h1>Dashboard</h1>
-          <SpeedSwitch />
-        </header>
+    <div className="app">
+      <header>
+        <h1>Dashboard</h1>
+        <SpeedSwitch />
+      </header>
+      <Suspense fallback={<Spinner />}>
         <div className="widgets">
           <Widget title="Random Number">
             <Random type="number" />
@@ -26,7 +26,9 @@ export default function App () {
           </Widget>
           <Widget title="Random Movie">
             <GoodSwitch value={onlyGood} onChange={setOnlyGood} />
-            <Random type="movie" args={{ onlyGood }} />
+            <Suspense fallback={<Spinner />}>
+              <Random type="movie" args={{ onlyGood }} />
+            </Suspense>
           </Widget>
           <Widget title="Summary">
             <Random type="number" />
@@ -34,7 +36,7 @@ export default function App () {
             <Random type="movie" args={{ onlyGood: false }} />
           </Widget>
         </div>
-      </div>
-    </DataProvider>
+      </Suspense>
+    </div>
   );
 }
