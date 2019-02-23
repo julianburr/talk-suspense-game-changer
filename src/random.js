@@ -1,37 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Spinner from './spinner';
-import api from './utils/api';
+import { DataContext } from './utils/data-context';
 
 export default function Random ({ type, args }) {
-  const [ loading, setLoading ] = useState(true);
-  const [ error, setError ] = useState(null);
-  const [ data, setData ] = useState(null);
-
-  const key = `${type}--${JSON.stringify(args)}`;
+  const { data, fetch, getKey } = useContext(DataContext);
+  const key = getKey(type, args);
 
   useEffect(
     () => {
-      api(type, args)
-        .then((data) => {
-          setLoading(false);
-          setError(null);
-          setData(data);
-        })
-        .catch((e) => {
-          console.error(e);
-          setLoading(false);
-          setError(e.message);
-          setData(null);
-        });
+      fetch(type, args);
     },
     [ key ]
   );
 
-  if (loading) {
+  if (!data[key] || data[key].loading) {
     return <Spinner />;
   }
-  if (error) {
-    return <p>Something went wrong! {error}</p>;
+
+  if (data[key].error) {
+    return <p>Something went wrong! {data[key].error}</p>;
   }
-  return <p>{data}</p>;
+
+  return <p>{data[key].data}</p>;
 }
