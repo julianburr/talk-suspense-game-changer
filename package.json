@@ -12,7 +12,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start:slides": "mdx-deck slides/index.mdx"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -22,5 +23,11 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "mdx-deck": "^1.10.0",
+    "react-spinners": "^0.5.1",
+    "react-syntax-highlighter": "^10.1.3",
+    "styled-components": "^4.1.3"
+  }
 }

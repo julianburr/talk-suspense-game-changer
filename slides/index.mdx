@@ -1,0 +1,72 @@
+import theme from './theme';
+export { theme };
+
+import JSX from './components/jsx';
+
+<p />
+
+---
+
+import Title from './components/title';
+
+<Title>Why Suspense Will Be a Game Changer</Title>
+
+---
+
+# What is Suspense
+
+Suspense is an upcoming React Feature that lets you handle async data flows much easier.
+
+---
+
+# Throw Promises
+
+By throwing a promise within a components render, you "suspend" it until the Promise resolves. React will then try again to render the component.
+
+---
+
+<JSX>
+{`function Example ({ id }) {
+  const data = cache.read(id);
+  // ^ this will throw a promise if data is not
+  //   already in the cache
+  return <p>{data}</p>;
+}`}
+</JSX>
+
+---
+
+# Catch Promises
+
+To handle loading states, you can catch these thrown Promises anywhere in your component tree and render fallbacks as needed.
+
+---
+
+<JSX>
+{`function App () {
+  return (
+    <>
+      <h1>Example</h1>
+      <Suspense fallback={<Spinner />}>
+        <Some>
+          <DeepNested>
+            <ComponentTree>
+              <AsyncComponent />
+            </ComponentTree>
+          </DeepNested>
+        </Some>
+      </Suspense>
+    </>
+  );
+}`}
+</JSX>
+
+---
+
+# Change Of Concern
+
+Loading states are no longer a component but an app concern 🎉
+
+---
+
+# Let's Code

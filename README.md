@@ -25,6 +25,14 @@ yarn
 yarn start
 ```
 
+I also created my slides in this repo:
+
+```bash
+# Clone + install dependencies as above
+# Start slideshow
+yarn start:slides
+```
+
 ## Summary
 
 ### Local State
